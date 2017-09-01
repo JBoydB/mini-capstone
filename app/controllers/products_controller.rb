@@ -1,27 +1,42 @@
 class ProductsController < ApplicationController
-  
-  def all_products
+  def show
+    @product = Product.find(params[:id])
+    render "show.html.erb"
+  end
+
+  def index
     @all_products = Product.all
-    render "allproducts.html.erb"
+    render "index.html.erb"
   end
 
-  def tv
-    @tv = Product.find_by(id: 1)
-    render "tv.html.erb"
+  def new
+    render "new.html.erb"
   end
 
-  def console
-    @console = Product.find_by(id: 2)
-    render "console.html.erb"
+  def create
+    @new_product = Product.new(
+      product_name: params[:product_name],
+      price: params[:price],
+      desc: params[:desc],
+      image: params[:image]
+      )
+    @new_product.save
+    render "create.html.erb"
   end
 
-  def remote
-    @remote = Product.find_by(id: 3)
-    render "remote.html.erb"
+  def update
+    @product = Product.find(params[:id])
+    @product.update(
+      product_name: params[:product_name],
+      price: params[:price],
+      desc: params[:desc],
+      image: params[:image]
+      )
+    render "update.html.erb"
   end
 
-  def paper
-    @paper = Product.find_by(id: 4)
-    render "paper.html.erb"
+  def edit
+    @product = Product.find(params[:id])
+    render "edit.html.erb"
   end
 end

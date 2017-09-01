@@ -1,0 +1,8 @@
+
+<h1 style="text-align: center;"><%= @product.product_name %></h1>
+<img src="<%=@product.image%>" style="height:300px; width:400px; display:block; margin:auto;">
+<h3 style="text-align: center;">$<%= @product.price%></h3>
+<p style="text-align: center;"><%= @product.desc%></p>
+<div style="text-align: center">
+  <a href="/products/<%=@product.id%>/edit">Edit</a>
+</div>

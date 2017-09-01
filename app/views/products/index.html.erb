@@ -1,0 +1,12 @@
+<h1 style="text-align: center;">All Products</h1>
+<% @all_products.each do |product| %>
+  <br>
+  <a href="/products/<%=product.id%>">
+    <img src="<%=product.image%>" style="height:300px; width:400px; display:block; margin:auto;">
+  </a>
+  <h2 style="text-align: center;"><%= product.product_name%></h2>
+  <h3 style="text-align: center;">$<%= product.price%></h3>
+  <p style="text-align: center;"><%= product.desc%></p>
+<
+<%end%>
+  <h2></h2>
