@@ -14,4 +14,8 @@ class Product < ApplicationRecord
   def total
     price.to_f + tax
   end
+
+  def stock?
+    in_stock
+  end
 end
