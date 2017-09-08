@@ -1,12 +1,21 @@
-<h1 style="text-align: center;">All Products</h1>
-<% @all_products.each do |product| %>
-  <br>
-  <a href="/products/<%=product.id%>">
-    <img src="<%=product.image%>" style="height:300px; width:400px; display:block; margin:auto;">
-  </a>
-  <h2 style="text-align: center;"><%= product.product_name%></h2>
-  <h3 style="text-align: center;">$<%= product.price%></h3>
-  <p style="text-align: center;"><%= product.desc%></p>
-<
-<%end%>
-  <h2></h2>
+<h1>All Products</h1>
+
+<div class="row">
+  <% @all_products.each do |product| %>
+    <div class="col-sm-4">
+      <div class="card" style="width: 20rem;">
+        <a href="/products/<%=product.id%>">
+          <img class="card-img-top" src="<%=product.image%>" alt="Card image cap"></a>
+          <div class="card-body">
+            <h4 class="card-title"> <%= product.product_name%> </h2>
+            <p class="card-text">$<%= product.price%>
+            <br>
+            <%= product.desc%> </p>
+          </div>
+      </div>
+    </div>
+  <%end%>
+</div>
+  <h2><a href="/products/new">Add New Product</a></h2>
+<br>
+<br>
