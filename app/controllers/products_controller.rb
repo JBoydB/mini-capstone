@@ -6,6 +6,14 @@ class ProductsController < ApplicationController
 
   def index
     @all_products = Product.all
+    sorting = params[:sort_by]
+    if sorting
+      @all_products = Product.all.order(sorting)
+    end
+    des_sorting = params[:des_sort_by]
+    if des_sorting
+      @all_products = Product.all.order(des_sorting => 'desc')
+    end
     render "index.html.erb"
   end
 
