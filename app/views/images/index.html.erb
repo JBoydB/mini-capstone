@@ -1,0 +1,15 @@
+<h1>All Images</h1>
+
+<div class="row">
+  <% @all_images.each do |image| %>
+      <div class="col-sm-4">
+        <div class="card" style="width: 20rem;">
+          <a href="/images/<%=image.id%>">
+            <img class="card-img-top" src="<%=image.url%>" alt="Card image cap"></a>
+            <div class="card-body">
+            </div>
+        </div>
+      </div> 
+  <%end%>
+</div>
+  <h2><a href="/images/new">Add New Image</a></h2>

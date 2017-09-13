@@ -1,0 +1,9 @@
+<img src="<%=@image.url%>" style="height:300px; width:400px; display:block; margin:auto;">
+<div style="text-align: center">
+  <a href="/images/<%=@image.id%>/edit">Edit</a>
+</div>
+<div style="text-align: center">
+<%= form_tag "/images/#{@image.id}", method: :delete do %>
+  <input type="submit" value="Delete Image">
+  <%end%>
+</div>

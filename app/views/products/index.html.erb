@@ -6,7 +6,7 @@
       <div class="col-sm-4">
         <div class="card" style="width: 20rem;">
           <a href="/products/<%=product.id%>">
-            <img class="card-img-top" src="<%=product.image%>" alt="Card image cap"></a>
+            <img class="card-img-top" src="<%=product.images[0].url%>" alt="Card image cap"></a>
             <div class="card-body">
               <h4 class="card-title"> <%= product.product_name%> </h2>
               <p class="card-text">$<%= product.price%>

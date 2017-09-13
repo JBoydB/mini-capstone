@@ -1,0 +1,17 @@
+<h1 style="text-align: center;"></h1>
+
+<%= form_tag "/images/#{@image.id}", method: :patch do %>
+  <div style="text-align:center">
+    Image URL:
+    <input type="text" name="url" value="<%=@image.url%>">
+  </div>
+  <br>
+  <div>
+    Product ID:
+    <input type="integer" name="product_id" value="<%=@image.product_id%>"
+  </div>
+  <br>
+  <div style="text-align:center">
+    <input type="submit" value="Submit Changes" style="width:20em">
+  </div>
+<%end%>

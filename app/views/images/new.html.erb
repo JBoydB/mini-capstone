@@ -1,0 +1,16 @@
+<h1 style="text-align: center;">Add A New Image</h1>
+
+<%= form_tag "/images", method: :post do %>
+  <div style="text-align:center">
+    Image URL:
+    <input type="text" name="url">
+  </div>
+  <div style="text-align:center">
+    Product ID:
+    <input type="integer" name="product_id">
+  </div>
+<br>
+  <div style="text-align:center">
+    <input type="submit" value="Submit New Image" style="width:20em">
+  </div>
+<%end%>

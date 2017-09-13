@@ -26,7 +26,6 @@ class ProductsController < ApplicationController
       product_name: params[:product_name],
       price: params[:price],
       desc: params[:desc],
-      image: params[:image]
       )
     new_product.save
     flash[:success] = "Product successfully added!"
@@ -39,7 +38,6 @@ class ProductsController < ApplicationController
       product_name: params[:product_name],
       price: params[:price],
       desc: params[:desc],
-      image: params[:image]
       )
     flash[:success] = "Product has been updated!"
     redirect_to "/products/#{@product.id}"
