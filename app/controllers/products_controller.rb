@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     render "show.html.erb"
+    @images = @product.images
   end
 
   def index

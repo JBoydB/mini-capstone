@@ -1,7 +1,9 @@
 
 <h1 style="text-align: center;"><%= @product.product_name %></h1>
 <h3>Supplied by: <%=@product.supplier.name%></h3>
-<img src="<%=@product.images[0].url%>" style="height:300px; width:400px; display:block; margin:auto;">
+<% @product.images.each do |image| %>
+  <img src="<%=image.url%>" style="height:300px; width:400px; display:block; margin:auto;">
+<%end%>
 <h3 style="text-align: center;"><%= number_to_currency(@product.price)%> <%=@product.sale_message%></h3>
 <h3> Tax: <%=number_to_currency(@product.tax)%></h3>
 <h3> Total: <%=number_to_currency(@product.total)%></h3>
