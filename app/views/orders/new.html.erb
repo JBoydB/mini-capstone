@@ -1,0 +1,12 @@
+<h1 style="text-align: center;">Add Order</h1>
+
+<%= form_tag "/products/#{@product.id}/orders", method: :post do %>
+  <div style="text-align:center">
+    Quantity:
+    <input type="integer" name="quantity">
+  </div>
+<br>
+  <div style="text-align:center">
+    <input type="submit" value="Submit Order" style="width:20em">
+  </div>
+<%end%>
