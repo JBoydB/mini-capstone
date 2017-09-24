@@ -1,0 +1,14 @@
+
+<h3> Cart <h3>
+
+<h2><% @cart.each do |carted_product| %>
+      <%= carted_product.product.product_name %><br>
+      <%= carted_product.product.price %>
+      <br>
+      <%= link_to "Remove", "/cart/#{carted_product.id}", method: :delete %>
+    <%end%>
+</h2>
+
+<%= form_tag "/orders", method: :post do %>
+  <%= submit_tag "checkout"%>
+  <%end%>

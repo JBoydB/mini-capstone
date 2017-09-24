@@ -1,33 +1,31 @@
 class OrdersController < ApplicationController
-  def new
-    @product = Product.find_by(id: params[:product_id])
-    render :new
-  end
 
   def create
-    @product = Product.find_by(id: params[:product_id])
+    subtotal = 0
     if current_user
-      product_id = params[:product_id]
-      order = Order.new(
-        user_id: current_user.id,
-        product_id: params[:product_id],
-        quantity: params[:quantity]
-        )
-      order.subtotal = @product.price * order.quantity.to_i
-      order.tax = order.subtotal * 0.09
-      order.total = order.tax + order.subtotal
-      order.save
-      redirect_to "/products/#{@product.id}/orders/#{order.id}"
+      @cart = current_user.carted_products.where(status: "carted")
+      @cart.each do |carted_product|
+        subtotal += carted_product.product.price * carted_product.quantity
+      end
     else
-      flash[:warning] = "You must Login to Order!"
+      flash[:warning] = "You must be logged in"
       redirect_to "/login"
     end
+    tax = subtotal * 0.09
+    total = subtotal + tax
+      order = Order.new(
+      user_id: @current_user.id,
+      subtotal: subtotal,
+      tax: tax,
+      total: total,
+      )
+    order.save
+    @cart.update(status: "Purchased", order_id: order.id)
+    redirect_to "/orders/#{order.id}"
   end
 
   def show
-    @product = Product.find_by(id: params[:product_id])
-    @order = Order.find(params[:id])
-    render :show
+  render "show.html.erb"  
   end
-end
 
+end

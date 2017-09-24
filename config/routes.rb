@@ -20,8 +20,10 @@ Rails.application.routes.draw do
   post "/login" => "sessions#create"
   get "/logout" => "sessions#destroy"
 
-  get "products/:product_id/orders/new" => "orders#new"
-  post "products/:product_id/orders" => "orders#create"
-  get "products/:product_id/orders/:id" => "orders#show"
-  
+  post "/checkout" => "orders#create"
+  get "/orders/:id" => "orders#show"
+
+  get "/cart" => "carted_products#index"
+  post "/cart" => "carted_products#create"
+  delete "/cart/:id" => "carted_products#destroy"
 end

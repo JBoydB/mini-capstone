@@ -1,9 +1,12 @@
 <h1>Order View</h1>
-<div class="card" style="width: 20rem;">
-  <img class="card-img-top" src="<%=@product.images[0].url%>" alt="Card image cap">
-</div>
 <h3><%= number_to_currency(@order.subtotal)%></h3>
 <h3> Tax: <%=number_to_currency(@order.tax)%></h3>
 <h3> Total: <%=number_to_currency(@order.total)%></h3>
-<p><%= @product.desc%></p>
+<%@order.carted_products.each do |carted_product|%>
+<h3><%= carted_product.product.product_name%>
+- Quantity: <%= carted_product.quantity%><br>
+ <img src="<%= carted_product.product.images.first%>">
+</h3>
+
+<%end%>
 <p> Your E-mail is: <%= current_user.email %></p>
