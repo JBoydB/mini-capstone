@@ -8,26 +8,30 @@
 <h3> Tax: <%=number_to_currency(@product.tax)%></h3>
 <h3> Total: <%=number_to_currency(@product.total)%></h3>
 <p style="text-align: center;"><%= @product.desc%></p>
-<div style="text-align: center">
-  <a href="/products/<%=@product.id%>/edit">Edit</a>
-</div>
-<div style="text-align: center">
-<%= form_tag "/products/#{@product.id}", method: :delete do %>
-  <input type="submit" value="Delete Product">
-  <%end%>
-</div>
+<% if current_user && current_user.admin %>
+  <div style="text-align: center">
+    <a href="/products/<%=@product.id%>/edit">Edit</a>
+  </div>
+  <div style="text-align: center">
+    <%= form_tag "/products/#{@product.id}", method: :delete do %>
+      <input type="submit" value="Delete Product">
+    <%end%>
+  </div>
+<% end %>
 <div>
-  <h3>Order this product:</h3>
-  <%= form_tag '/cart', method: :post do %>
-    <div>
-      <%=hidden_field_tag :product_id, @product.id%>
-    </div>
-    <div>
-      <%= label_tag :quantity %>
-      <%= number_field_tag :quantity %>
-    </div>
-    <div>
-      <%= submit_tag "Add to Cart" %>
-    </div>
+  <% if current_user %>
+    <h3>Order this product:</h3>
+    <%= form_tag '/cart', method: :post do %>
+      <div>
+        <%=hidden_field_tag :product_id, @product.id%>
+      </div>
+      <div>
+        <%= label_tag :quantity %>
+        <%= number_field_tag :quantity %>
+      </div>
+      <div>
+        <%= submit_tag "Add to Cart" %>
+      </div>
+    <%end%>
   <%end%>
 </div> 

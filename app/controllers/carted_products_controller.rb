@@ -11,15 +11,20 @@ class CartedProductsController < ApplicationController
   end
 
   def create
-    product_id = params[:product_id]
-    cart_product = CartedProduct.new(
-      user_id: current_user.id,
-      product_id: product_id,
-      quantity: params[:quantity],
-      status: "carted"
-      )
-    cart_product.save
-    redirect_to "/cart"
+    if current_user
+      product_id = params[:product_id]
+      cart_product = CartedProduct.new(
+        user_id: current_user.id,
+        product_id: product_id,
+        quantity: params[:quantity],
+        status: "carted"
+        )
+      cart_product.save
+      redirect_to "/cart"
+    else
+      flash[:warning] = "You need to be logged in"
+      redirect_to "/login"
+    end
   end
 
   def destroy

@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_admin!, except: [:index, :show]
+
   def show
     @product = Product.find(params[:id])
     render "show.html.erb"
@@ -19,7 +21,8 @@ class ProductsController < ApplicationController
   end
 
   def new
-    render "new.html.erb"
+      @product = Product.new
+      render "new.html.erb"
   end
 
   def create
@@ -28,20 +31,32 @@ class ProductsController < ApplicationController
       price: params[:price],
       desc: params[:desc],
       )
-    new_product.save
-    flash[:success] = "Product successfully added!"
-    redirect_to "/products/#{new_product.id}"
+    if new_product.save
+      flash[:success] = "Product successfully added!"
+      redirect_to "/products/#{new_product.id}"
+    else
+      render :new
+    end
   end
 
   def update
     @product = Product.find(params[:id])
-    @product.update(
-      product_name: params[:product_name],
-      price: params[:price],
-      desc: params[:desc],
-      )
-    flash[:success] = "Product has been updated!"
-    redirect_to "/products/#{@product.id}"
+      @product.update(
+          product_name: params[:product_name],
+          price: params[:price],
+          desc: params[:desc],
+          )
+      @product.product_name = params[:product_name]
+      @product.price = params[:price]
+      @product.desc = params[:desc]
+      if @product.save
+        redirect_to "/products/#{@product.id}"
+      else
+        render :edit
+      end
+
+      flash[:success] = "Product has been updated!"
+      redirect_to "/products/#{@product.id}"
   end
 
   def edit

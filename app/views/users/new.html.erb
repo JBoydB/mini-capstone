@@ -1,5 +1,16 @@
 <h1> Signup! </h1>
-
+<% if @user && @user.errors.any? %>
+  <div id="error_explaination">
+    <h2><%= pluralize(@user.errors.count, "error") %> must be resolved to create this account.</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li>
+          <%= message %>
+        </li>
+      <%end%>
+    </ul>
+  </div>
+<%end%>
 <%= form_tag '/users', method: :post do %>
   <div>
   <%= label_tag :name %>

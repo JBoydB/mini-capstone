@@ -1,5 +1,14 @@
 <h1 style="text-align: center;">Update <%=@product.product_name%></h1>
-
+<div id="error_explaination">
+  <h2><%= pluralize(@product.errors.count, "error") %> must be resolved to add this product.</h2>
+  <ul>
+    <% @product.errors.full_messages.each do |message| %>
+      <li>
+        <%= message %>
+      </li>
+    <%end%>
+  </ul>
+</div>
 <%= form_tag "/products/#{@product.id}", method: :patch do %>
   <div style="text-align:center">
     Name of Product:

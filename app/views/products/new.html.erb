@@ -1,24 +1,30 @@
 <h1 style="text-align: center;">Add A New Product</h1>
-
+<% if @product && @product.errors.any? %>
+  <div id="error_explaination">
+    <h2><%= pluralize(@product.errors.count, "error") %> must be resolved to add this product.</h2>
+    <ul>
+      <% @product.errors.full_messages.each do |message| %>
+        <li>
+          <%= message %>
+        </li>
+      <%end%>
+    </ul>
+  </div>
+<%end%>
 <%= form_tag "/products", method: :post do %>
   <div style="text-align:center">
     Name of Product:
-    <input type="text" name="product_name">
+    <input type="text" name="product_name" value="<%=@product.product_name%>">
   </div>
 <br>
   <div style="text-align:center">
     Price(numbers and decimal only):
-    <input type="float" name="price">
+    <input type="float" name="price" value="<%=@product.price%>">
   </div>
 <br>
   <div style="text-align:center">
     Description of Product:
-    <input type="text" name="desc">
-  </div>
-<br>
-  <div style="text-align:center">
-    Link to Product Image:
-    <input type="text" name="">
+    <input type="text" name="desc" value="<%=@product.desc%>">
   </div>
 <br>
   <div style="text-align:center">
